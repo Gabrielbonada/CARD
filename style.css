@@ -1,0 +1,244 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', 'Arial', sans-serif;
+    background: #0b0c10 url("https://www.transparenttextures.com/patterns/black-felt.png");
+    color: #ddd;
+    min-height: 100vh;
+}
+
+header {
+    background: #090909;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #333;
+    box-shadow: 0 4px 20px #000;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+}
+
+header img {
+    width: 80px;
+    filter: drop-shadow(0 0 6px #fff);
+}
+
+header h1 {
+    font-size: 2.5em;
+    color: #f1f1f1;
+    font-family: 'Georgia', serif;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px #44f;
+}
+
+.juncao-botao {
+    display: flex;
+    gap: 20px;
+}
+.paiboard{
+    display: flex;
+    justify-content: space-between;
+}
+
+#board {
+    width: 20%;
+    height: 20%;
+    min-height: 250px;
+    margin-top: 30px;
+    border: 3px dashed #555;
+    border-radius: 20px;
+    background: radial-gradient(circle at center, #111 0%, #080808 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+    color: #ccc;
+    text-shadow: 0 0 6px #000;
+    box-shadow: inset 0 0 20px #0006, 0 0 20px #1114;
+    padding: 20px;
+    transition: background 0.3s ease;
+}
+
+/* Cards */
+#hand {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 80px;
+    padding: 40px 0;
+}
+
+.card {
+    width: 200px;
+    height: 250px;
+    background: linear-gradient(145deg, #161616, #1f1f1f);
+    border: 2px solid #333;
+    border-radius: 16px;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.9);
+    color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 20px 10px;
+    cursor: grab;
+    position: relative;
+    background-image: url('https://i.imgur.com/k6dyW0v.png');
+    background-size: 60px;
+    background-repeat: no-repeat;
+    background-position: top 20px center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+@keyframes glow {
+    0% {
+        filter: drop-shadow(0 0 4px #444);
+    }
+
+    50% {
+        filter: drop-shadow(0 0 10px #fff);
+    }
+
+    100% {
+        filter: drop-shadow(0 0 4px #444);
+    }
+}
+
+@keyframes glow-dark {
+    0% {
+        filter: drop-shadow(0 0 4px #444);
+    }
+
+    50% {
+        filter: drop-shadow(0 0 12px #fff);
+    }
+
+    100% {
+        filter: drop-shadow(0 0 4px #444);
+    }
+}
+
+.card {
+    animation: glow 4s infinite ease-in-out;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-6px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+header img {
+    animation:
+        float 4s ease-in-out infinite,
+        glow-dark 3s ease-in-out infinite;
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.08);
+    box-shadow: 0 16px 32px rgba(200, 200, 255, 0.15);
+}
+
+.card.dragging {
+    opacity: 0.4;
+}
+
+.card strong {
+    margin-top: 45px;
+    font-size: 1.2em;
+    text-shadow: 0 0 8px #88f, 0 0 4px #fff;
+    text-align: center;
+}
+
+.card .desc {
+    font-size: 0.95em;
+    color: #bbb;
+    text-align: center;
+    margin-top: 6px;
+    text-shadow: 0 0 4px #000;
+}
+
+.imgperso {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    image-rendering: auto;
+}
+
+#imgperso1 {
+    width: 150px;
+    height: 133px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    image-rendering: auto;
+}
+
+#imgperso2 {
+    width: 150px;
+    height: 133px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    image-rendering: auto;
+}
+
+#imgperso3 {
+    width: 150px;
+    height: 105px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    image-rendering: auto;
+}
+
+#imgperso4 {
+    width: 150px;
+    height: 120px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    image-rendering: auto;
+}
+
+.juncao-botao button {
+    background: linear-gradient(to bottom, #222, #111);
+    border: 1px solid #555;
+    padding: 10px 20px;
+    border-radius: 12px;
+    color: #f0f0f0;
+    font-size: 1em;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+    transition: all 0.3s ease;
+}
+
+.juncao-botao button:hover {
+    background: linear-gradient(to bottom, #333, #000);
+    box-shadow: 0 6px 14px rgba(255, 255, 255, 0.1);
+    transform: scale(1.05);
+}
+
+.juncao-botao button a {
+    text-decoration: none;
+    color: inherit;
+}
