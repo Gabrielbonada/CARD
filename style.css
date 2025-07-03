@@ -1,244 +1,364 @@
 body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', 'Arial', sans-serif;
-    background: #0b0c10 url("https://www.transparenttextures.com/patterns/black-felt.png");
-    color: #ddd;
-    min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", "Arial", sans-serif;
+  background: #0b0c10
+    url("https://www.transparenttextures.com/patterns/black-felt.png");
+  color: #ddd;
+  min-height: 100vh;
 }
 
 header {
-    background: #090909;
-    padding: 20px 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #333;
-    box-shadow: 0 4px 20px #000;
+  background: #090909;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #333;
+  box-shadow: 0 4px 20px #000;
 }
 
 .header-content {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
 header img {
-    width: 80px;
-    filter: drop-shadow(0 0 6px #fff);
+  width: 80px;
+  filter: drop-shadow(0 0 6px #fff);
 }
 
 header h1 {
-    font-size: 2.5em;
-    color: #f1f1f1;
-    font-family: 'Georgia', serif;
-    letter-spacing: 2px;
-    text-shadow: 0 0 10px #44f;
+  font-size: 2.5em;
+  color: #f1f1f1;
+  font-family: "Georgia", serif;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px #44f;
 }
 
 .juncao-botao {
-    display: flex;
-    gap: 20px;
+  display: flex;
+  gap: 20px;
 }
-.paiboard{
-    display: flex;
-    justify-content: space-between;
+.batalha {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 75%;
+  margin: 0 auto;
 }
 
-#board {
-    width: 20%;
-    height: 20%;
-    min-height: 250px;
-    margin-top: 30px;
-    border: 3px dashed #555;
-    border-radius: 20px;
-    background: radial-gradient(circle at center, #111 0%, #080808 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2em;
-    color: #ccc;
-    text-shadow: 0 0 6px #000;
-    box-shadow: inset 0 0 20px #0006, 0 0 20px #1114;
-    padding: 20px;
-    transition: background 0.3s ease;
+.board {
+  position: relative;
+  width: 30%;
+  height: 20%;
+  min-height: 250px;
+  margin-top: 30px;
+  border: 2px dashed #444;
+  border-radius: 20px;
+  background: radial-gradient(circle at center, #111 0%, #080808 100%),
+    url("https://www.transparenttextures.com/patterns/dark-mosaic.png");
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2em;
+  color: #ccc;
+  text-shadow: 0 0 6px #000;
+  box-shadow: inset 0 0 20px #0006, 0 0 20px #1114;
+  padding: 20px;
+  animation: shimmer 15s linear infinite, pulse-border 3s ease-in-out infinite;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.board:hover {
+  transform: scale(1.03);
+  box-shadow: inset 0 0 20px rgba(136, 136, 255, 0.15),
+    0 0 30px rgba(136, 136, 255, 0.4);
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 100px 100px;
+  }
+}
+
+@keyframes pulse-border {
+  0%,
+  100% {
+    box-shadow: 0 0 10px #444, 0 0 30px #111 inset;
+  }
+  50% {
+    box-shadow: 0 0 20px red, 0 0 60px #222 inset;
+  }
 }
 
 /* Cards */
 #hand {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 80px;
-    padding: 40px 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 80px;
+  padding: 80px 0;
+  width: 100%;
+  max-width: 80%;
+  margin: 0 auto;
 }
 
 .card {
-    width: 200px;
-    height: 250px;
-    background: linear-gradient(145deg, #161616, #1f1f1f);
-    border: 2px solid #333;
-    border-radius: 16px;
-    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.9);
-    color: #f0f0f0;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
-    padding: 20px 10px;
-    cursor: grab;
-    position: relative;
-    background-image: url('https://i.imgur.com/k6dyW0v.png');
-    background-size: 60px;
-    background-repeat: no-repeat;
-    background-position: top 20px center;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  width: 200px;
+  height: 250px;
+  background: linear-gradient(145deg, #161616, #1f1f1f);
+  border: 2px solid #333;
+  border-radius: 16px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.9);
+  color: #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 20px 10px;
+  cursor: grab;
+  position: relative;
+  background-image: url("https://i.imgur.com/k6dyW0v.png");
+  background-size: 60px;
+  background-repeat: no-repeat;
+  background-position: top 20px center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 @keyframes glow {
-    0% {
-        filter: drop-shadow(0 0 4px #444);
-    }
+  0% {
+    filter: drop-shadow(0 0 4px #444);
+  }
 
-    50% {
-        filter: drop-shadow(0 0 10px #fff);
-    }
+  50% {
+    filter: drop-shadow(0 0 10px #fff);
+  }
 
-    100% {
-        filter: drop-shadow(0 0 4px #444);
-    }
+  100% {
+    filter: drop-shadow(0 0 4px #444);
+  }
 }
 
 @keyframes glow-dark {
-    0% {
-        filter: drop-shadow(0 0 4px #444);
-    }
+  0% {
+    filter: drop-shadow(0 0 4px #444);
+  }
 
-    50% {
-        filter: drop-shadow(0 0 12px #fff);
-    }
+  50% {
+    filter: drop-shadow(0 0 12px #fff);
+  }
 
-    100% {
-        filter: drop-shadow(0 0 4px #444);
-    }
+  100% {
+    filter: drop-shadow(0 0 4px #444);
+  }
 }
 
 .card {
-    animation: glow 4s infinite ease-in-out;
+  animation: glow 4s infinite ease-in-out;
 }
 
 @keyframes float {
-    0% {
-        transform: translateY(0);
-    }
+  0% {
+    transform: translateY(0);
+  }
 
-    50% {
-        transform: translateY(-6px);
-    }
+  50% {
+    transform: translateY(-6px);
+  }
 
-    100% {
-        transform: translateY(0);
-    }
+  100% {
+    transform: translateY(0);
+  }
 }
 
 header img {
-    animation:
-        float 4s ease-in-out infinite,
-        glow-dark 3s ease-in-out infinite;
-    transition: transform 0.3s;
+  animation: float 4s ease-in-out infinite, glow-dark 3s ease-in-out infinite;
+  transition: transform 0.3s;
 }
 
 .card:hover {
-    transform: scale(1.08);
-    box-shadow: 0 16px 32px rgba(200, 200, 255, 0.15);
+  transform: scale(1.08);
+  box-shadow: 0 16px 32px rgba(200, 200, 255, 0.15);
 }
 
 .card.dragging {
-    opacity: 0.4;
+  opacity: 0.4;
 }
 
 .card strong {
-    margin-top: 45px;
-    font-size: 1.2em;
-    text-shadow: 0 0 8px #88f, 0 0 4px #fff;
-    text-align: center;
+  margin-top: 45px;
+  font-size: 1.2em;
+  text-shadow: 0 0 8px #88f, 0 0 4px #fff;
+  text-align: center;
 }
 
 .card .desc {
-    font-size: 0.95em;
-    color: #bbb;
-    text-align: center;
-    margin-top: 6px;
-    text-shadow: 0 0 4px #000;
+  font-size: 0.95em;
+  color: #bbb;
+ 
+  margin-top: 6px;
+  text-shadow: 0 0 4px #000;
 }
 
 .imgperso {
-    width: 150px;
-    height: 150px;
-    object-fit: contain;
-    display: block;
-    margin: 0 auto;
-    image-rendering: auto;
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+  image-rendering: auto;
 }
 
 #imgperso1 {
-    width: 150px;
-    height: 133px;
-    object-fit: contain;
-    display: block;
-    margin: 0 auto;
-    image-rendering: auto;
+  width: 150px;
+  height: 133px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+  image-rendering: auto;
+  position: relative;
+  top: 30px;
 }
 
 #imgperso2 {
-    width: 150px;
-    height: 133px;
-    object-fit: contain;
-    display: block;
-    margin: 0 auto;
-    image-rendering: auto;
+  width: 150px;
+  height: 133px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+  image-rendering: auto;
+    position: relative;
+  top: 30px;
 }
 
 #imgperso3 {
-    width: 150px;
-    height: 105px;
-    object-fit: contain;
-    display: block;
-    margin: 0 auto;
-    image-rendering: auto;
+  width: 150px;
+  height: 105px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+  image-rendering: auto;
+  position: relative;
+  top: 25px;
 }
 
 #imgperso4 {
-    width: 150px;
-    height: 120px;
-    object-fit: contain;
-    display: block;
-    margin: 0 auto;
-    image-rendering: auto;
+  width: 150px;
+  height: 120px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+  image-rendering: auto;
+  position: relative;
+  top: 30px;
+}
+#imgperso5{
+     width: 150px;
+  height: 120px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+  image-rendering: auto;
+  position: relative;
+  top: 30px;
+
+}
+#icon {
+  width: 50px;
+  height: 50px;
+}
+#icon:hover {
+  animation: tremer 7s infinite;
+}
+@keyframes tremer {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-1px, 1px);
+  }
+  40% {
+    transform: translate(1px, -1px);
+  }
+  60% {
+    transform: translate(-1px, 1px);
+  }
+  80% {
+    transform: translate(1px, -1px);
+  }
+  100% {
+    transform: translate(0);
+  }
 }
 
 .juncao-botao button {
-    background: linear-gradient(to bottom, #222, #111);
-    border: 1px solid #555;
-    padding: 10px 20px;
-    border-radius: 12px;
-    color: #f0f0f0;
-    font-size: 1em;
-    font-weight: bold;
-    text-transform: uppercase;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
-    transition: all 0.3s ease;
+  background: linear-gradient(to bottom, #222, #111);
+  border: 1px solid #555;
+  padding: 10px 20px;
+  border-radius: 12px;
+  color: #f0f0f0;
+  font-size: 1em;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+  transition: all 0.3s ease;
 }
 
 .juncao-botao button:hover {
-    background: linear-gradient(to bottom, #333, #000);
-    box-shadow: 0 6px 14px rgba(255, 255, 255, 0.1);
-    transform: scale(1.05);
+  background: linear-gradient(to bottom, #333, #000);
+  box-shadow: 0 6px 14px rgba(255, 255, 255, 0.1);
+  transform: scale(1.05);
 }
 
 .juncao-botao button a {
-    text-decoration: none;
-    color: inherit;
+  text-decoration: none;
+  color: inherit;
 }
+@keyframes neon-glow {
+  0%,
+  100% {
+    text-shadow: 0 0 8px #9cf, 0 0 16px #69f;
+  }
+  50% {
+    text-shadow: 0 0 12px #bdf, 0 0 24px #7af;
+  }
+}
+
+.header-content h1 {
+  animation: neon-glow 2.5s ease-in-out infinite;
+}
+.buttonsec {
+  animation: glow-dark 3s ease-in-out infinite;
+  transition: transform 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 40px;
+}
+.buttonsec button {
+  background: linear-gradient(to bottom, #222, #111);
+  border: 1px solid #555;
+  padding: 10px 20px;
+  border-radius: 12px;
+  color: #f0f0f0;
+  font-size: 1em;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+  transition: all 0.3s ease;
+}
+.board.hovered {
+  background-color: #1a1a1a;
+  border-color: #88f;
+  box-shadow: 0 0 10px #88f;
+}
+
+
