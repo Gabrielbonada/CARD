@@ -3,9 +3,16 @@ window.addEventListener("DOMContentLoaded", function () {
   const cards = document.querySelectorAll(".card");
   const boards = document.querySelectorAll(".board");
   const btnBatalha = document.getElementById("btnBatalha");
+  const loginBtn = document.getElementById("btnLogin");
+  const loginModal = document.getElementById("loginModal");
+  const battleModal = document.getElementById("battleModal");
+  const closeLogin = loginModal?.querySelector(".close");
+  const closeBattle = battleModal?.querySelector(".close");
+
   let dragged = null;
   let origin = null;
 
+  // Arrastar e soltar
   cards.forEach((card) => {
     card.addEventListener("dragstart", () => {
       dragged = card;
@@ -47,7 +54,7 @@ window.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // 🎯 Clica no botão para iniciar batalha
+  // Botão de batalha
   btnBatalha.addEventListener("click", () => {
     const [board1, board2] = boards;
 
@@ -59,62 +66,84 @@ window.addEventListener("DOMContentLoaded", function () {
     iniciarBatalha(board1, board2);
   });
 
-  // ⚔️ Função de batalha
+  // Função principal da batalha
   function iniciarBatalha(board1, board2) {
     const carta1 = board1.querySelector(".card");
     const carta2 = board2.querySelector(".card");
 
-    const poder1 = parseInt(carta1.dataset.power);
-    const poder2 = parseInt(carta2.dataset.power);
-
-    let resultado = "";
-
-    if (poder1 > poder2) {
-      resultado = `🛡️ ${carta1.querySelector("strong").textContent} venceu!`;
-      carta2.remove();
-    } else if (poder2 > poder1) {
-      resultado = `🛡️ ${carta2.querySelector("strong").textContent} venceu!`;
-      carta1.remove();
-    } else {
-      resultado = "⚔️ Empate!";
-      carta1.remove();
-      carta2.remove();
+    function calcularMedia(carta) {
+      const texto = carta.querySelector(".desc").textContent;
+      const ataque = parseInt(texto.match(/🗡️Ataque:\s*(\d+)/)[1]);
+      const defesa = parseInt(texto.match(/🛡️defesa:\s*(\d+)/)[1]);
+      const agilidade = parseInt(texto.match(/🏃Agilidade:\s*(\d+)/)[1]);
+      const mana = parseInt(texto.match(/🔵 Mana:\s*(\d+)/)[1]);
+      return (ataque + defesa + agilidade + mana) / 4;
     }
 
-    setTimeout(() => alert(resultado), 200);
+    const media1 = calcularMedia(carta1);
+    const media2 = calcularMedia(carta2);
+
+    let titulo = "";
+    let texto = "";
+    let icone = "";
+
+    if (media1 > media2) {
+      titulo = "Vitória!";
+      texto = `${carta1.querySelector("strong").textContent} venceu com média ${media1.toFixed(1)}!`;
+      icone = "🏆";
+      carta2.classList.add("derrotada");
+      setTimeout(() => carta2.remove(), 400);
+    } else if (media2 > media1) {
+      titulo = "Vitória!";
+      texto = `${carta2.querySelector("strong").textContent} venceu com média ${media2.toFixed(1)}!`;
+      icone = "🏆";
+      carta1.classList.add("derrotada");
+      setTimeout(() => carta1.remove(), 400);
+    } else {
+      titulo = "Empate!";
+      texto = `⚔️ Ambas as cartas têm média ${media1.toFixed(1)}.`;
+      icone = "⚔️";
+      carta1.classList.add("derrotada");
+      carta2.classList.add("derrotada");
+      setTimeout(() => {
+        carta1.remove();
+        carta2.remove();
+      }, 400);
+    }
+
+    exibirModal(titulo, texto, icone);
   }
-});
-const track = document.querySelector(".carousel-track");
-const btnPrev = document.getElementById("prevBtn");
-const btnNext = document.getElementById("nextBtn");
 
-let scrollAmount = 0;
-const scrollStep = 300; // quanto andar por clique
+  // Modal de batalha
+  function exibirModal(titulo, texto, icone) {
+    document.getElementById("modalTitle").textContent = titulo;
+    document.getElementById("modalText").textContent = texto;
+    document.getElementById("iconResult").textContent = icone;
+    battleModal.style.display = "flex";
+  }
 
-btnNext.addEventListener("click", () => {
-  scrollAmount += scrollStep;
-  track.scrollTo({
-    left: scrollAmount,
-    behavior: "smooth"
+  // Fechamento dos modais
+  closeLogin?.addEventListener("click", () => {
+    loginModal.style.display = "none";
+  });
+
+  closeBattle?.addEventListener("click", () => {
+    battleModal.style.display = "none";
+  });
+
+  window.addEventListener("click", (e) => {
+    if (e.target === loginModal) loginModal.style.display = "none";
+    if (e.target === battleModal) battleModal.style.display = "none";
+  });
+
+  loginBtn?.addEventListener("click", () => {
+    loginModal.style.display = "block";
   });
 });
-
-btnPrev.addEventListener("click", () => {
-  scrollAmount -= scrollStep;
-  if (scrollAmount < 0) scrollAmount = 0;
-  track.scrollTo({
-    left: scrollAmount,
-    behavior: "smooth"
-  });
-});
-const container = document.querySelector(".carousel-container");
-const nextBtn = document.getElementById("nextBtn");
-const prevBtn = document.getElementById("prevBtn");
-
-nextBtn.addEventListener("click", () => {
-  container.scrollBy({ left: 400, behavior: "smooth" });
-});
-
-prevBtn.addEventListener("click", () => {
-  container.scrollBy({ left: -400, behavior: "smooth" });
-});
+zone.appendChild(dragged);
+dragged.style.transition = "transform 0.3s ease";
+dragged.style.transform = "scale(1.1)";
+setTimeout(() => {
+  dragged.style.transform = "scale(1)";
+  dragged = null;
+}, 300);
