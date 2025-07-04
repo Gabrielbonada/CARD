@@ -1,4 +1,7 @@
+// Espera o carregamento completo do DOM
 window.addEventListener("DOMContentLoaded", function () {
+
+  // ======= SELETORES ==========
   const hand = document.getElementById("hand");
   const cards = document.querySelectorAll(".card");
   const boards = document.querySelectorAll(".board");
@@ -9,10 +12,11 @@ window.addEventListener("DOMContentLoaded", function () {
   const closeLogin = loginModal?.querySelector(".close");
   const closeBattle = battleModal?.querySelector(".close");
 
+  // ========= VARIÁVEIS =========
   let dragged = null;
   let origin = null;
 
-  // Arrastar e soltar
+  // ====== LÓGICA DE ARRASTAR E SOLTAR =======
   cards.forEach((card) => {
     card.addEventListener("dragstart", () => {
       dragged = card;
@@ -25,9 +29,11 @@ window.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+  // Ativa áreas dropáveis
   boards.forEach((board) => allowDropZone(board));
   allowDropZone(hand);
 
+  // ========= FUNÇÃO PARA ZONAS DROPÁVEIS =========
   function allowDropZone(zone) {
     zone.addEventListener("dragover", (e) => {
       e.preventDefault();
@@ -43,21 +49,29 @@ window.addEventListener("DOMContentLoaded", function () {
       zone.classList.remove("hovered");
 
       if (dragged) {
+        // Impede que duas cartas fiquem no mesmo campo de batalha
         if (zone.classList.contains("board") && zone.children.length > 0) {
           alert("Este campo já tem uma carta!");
           return;
         }
 
+        // Animação ao soltar a carta
         zone.appendChild(dragged);
-        dragged = null;
+        dragged.style.transition = "transform 0.3s ease";
+        dragged.style.transform = "scale(1.1)";
+        setTimeout(() => {
+          dragged.style.transform = "scale(1)";
+          dragged = null;
+        }, 300);
       }
     });
   }
 
-  // Botão de batalha
+  // ========= BOTÃO DE BATALHA =========
   btnBatalha.addEventListener("click", () => {
     const [board1, board2] = boards;
 
+    // Garante que ambos os lados tenham cartas
     if (board1.children.length === 0 || board2.children.length === 0) {
       alert("Ambos os campos precisam ter uma carta para batalhar!");
       return;
@@ -66,11 +80,12 @@ window.addEventListener("DOMContentLoaded", function () {
     iniciarBatalha(board1, board2);
   });
 
-  // Função principal da batalha
+  // ========= FUNÇÃO PRINCIPAL DE BATALHA =========
   function iniciarBatalha(board1, board2) {
     const carta1 = board1.querySelector(".card");
     const carta2 = board2.querySelector(".card");
 
+    // Extrai os atributos da carta e calcula a média
     function calcularMedia(carta) {
       const texto = carta.querySelector(".desc").textContent;
       const ataque = parseInt(texto.match(/🗡️Ataque:\s*(\d+)/)[1]);
@@ -87,6 +102,7 @@ window.addEventListener("DOMContentLoaded", function () {
     let texto = "";
     let icone = "";
 
+    // Verifica vencedor ou empate
     if (media1 > media2) {
       titulo = "Vitória!";
       texto = `${carta1.querySelector("strong").textContent} venceu com média ${media1.toFixed(1)}!`;
@@ -111,10 +127,11 @@ window.addEventListener("DOMContentLoaded", function () {
       }, 400);
     }
 
+    // Mostra modal com o resultado
     exibirModal(titulo, texto, icone);
   }
 
-  // Modal de batalha
+  // ========= EXIBIR MODAL DE BATALHA =========
   function exibirModal(titulo, texto, icone) {
     document.getElementById("modalTitle").textContent = titulo;
     document.getElementById("modalText").textContent = texto;
@@ -122,28 +139,19 @@ window.addEventListener("DOMContentLoaded", function () {
     battleModal.style.display = "flex";
   }
 
-  // Fechamento dos modais
+  // ========= MODAL DE LOGIN =========
   closeLogin?.addEventListener("click", () => {
     loginModal.style.display = "none";
-  });
-
-  closeBattle?.addEventListener("click", () => {
-    battleModal.style.display = "none";
-  });
-
-  window.addEventListener("click", (e) => {
-    if (e.target === loginModal) loginModal.style.display = "none";
-    if (e.target === battleModal) battleModal.style.display = "none";
   });
 
   loginBtn?.addEventListener("click", () => {
     loginModal.style.display = "block";
   });
+
+  // ========= FECHAMENTO DE MODAIS AO CLICAR FORA =========
+  window.addEventListener("click", (e) => {
+    if (e.target === loginModal) loginModal.style.display = "none";
+    if (e.target === battleModal) battleModal.style.display = "none";
+  });
+
 });
-zone.appendChild(dragged);
-dragged.style.transition = "transform 0.3s ease";
-dragged.style.transform = "scale(1.1)";
-setTimeout(() => {
-  dragged.style.transform = "scale(1)";
-  dragged = null;
-}, 300);
