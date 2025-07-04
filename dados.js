@@ -6,7 +6,7 @@ const cartas = [
     agilidade: 1,
     mana: 0,
     descricao: "Brutal, mas desajeitado com sua maça enferrujada.",
-    habilidade: "aa",
+    habilidade: "",
   },
   {
     name: "Gruz Mother",
@@ -96,7 +96,7 @@ const cartas = [
     agilidade: 10,
     mana: 10,
     descricao: "Mestre do ritual escarlate, dança com chamas e sombras.",
-    habilidade: "aa",
+    habilidade: attack ++,
   },
 
   {

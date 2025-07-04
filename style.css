@@ -2,8 +2,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Segoe UI", "Arial", sans-serif;
-  background: #0b0c10
-    url("https://www.transparenttextures.com/patterns/black-felt.png");
+  background: #0b0c10 url("https://www.transparenttextures.com/patterns/black-felt.png");
   color: #ddd;
   min-height: 100vh;
 }
@@ -41,6 +40,7 @@ header h1 {
   display: flex;
   gap: 20px;
 }
+
 .batalha {
   display: flex;
   justify-content: space-between;
@@ -82,16 +82,19 @@ header h1 {
   0% {
     background-position: 0 0;
   }
+
   100% {
     background-position: 100px 100px;
   }
 }
 
 @keyframes pulse-border {
+
   0%,
   100% {
     box-shadow: 0 0 10px #444, 0 0 30px #111 inset;
   }
+
   50% {
     box-shadow: 0 0 20px red, 0 0 60px #222 inset;
   }
@@ -201,7 +204,7 @@ header img {
 .card .desc {
   font-size: 0.95em;
   color: #bbb;
- 
+
   margin-top: 6px;
   text-shadow: 0 0 4px #000;
 }
@@ -233,7 +236,7 @@ header img {
   display: block;
   margin: 0 auto;
   image-rendering: auto;
-    position: relative;
+  position: relative;
   top: 30px;
 }
 
@@ -258,8 +261,9 @@ header img {
   position: relative;
   top: 30px;
 }
-#imgperso5{
-     width: 150px;
+
+#imgperso5 {
+  width: 150px;
   height: 120px;
   object-fit: contain;
   display: block;
@@ -269,29 +273,37 @@ header img {
   top: 30px;
 
 }
+
 #icon {
   width: 50px;
   height: 50px;
 }
+
 #icon:hover {
   animation: tremer 7s infinite;
 }
+
 @keyframes tremer {
   0% {
     transform: translate(0);
   }
+
   20% {
     transform: translate(-1px, 1px);
   }
+
   40% {
     transform: translate(1px, -1px);
   }
+
   60% {
     transform: translate(-1px, 1px);
   }
+
   80% {
     transform: translate(1px, -1px);
   }
+
   100% {
     transform: translate(0);
   }
@@ -321,11 +333,14 @@ header img {
   text-decoration: none;
   color: inherit;
 }
+
 @keyframes neon-glow {
+
   0%,
   100% {
     text-shadow: 0 0 8px #9cf, 0 0 16px #69f;
   }
+
   50% {
     text-shadow: 0 0 12px #bdf, 0 0 24px #7af;
   }
@@ -334,6 +349,7 @@ header img {
 .header-content h1 {
   animation: neon-glow 2.5s ease-in-out infinite;
 }
+
 .buttonsec {
   animation: glow-dark 3s ease-in-out infinite;
   transition: transform 0.3s;
@@ -342,6 +358,7 @@ header img {
   justify-content: center;
   gap: 40px;
 }
+
 .buttonsec button {
   background: linear-gradient(to bottom, #222, #111);
   border: 1px solid #555;
@@ -355,10 +372,58 @@ header img {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
   transition: all 0.3s ease;
 }
+
 .board.hovered {
   background-color: #1a1a1a;
   border-color: #88f;
   box-shadow: 0 0 10px #88f;
 }
 
+button:focus {
+  outline: 2px solid #88f;
+  outline-offset: 4px;
+}
+.carousel-wrapper {
+  position: relative;
+  max-width: 90%;
+  margin: 60px auto;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
 
+.carousel-container {
+  overflow-x: hidden;
+  flex: 1;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 40px;
+  transition: transform 0.4s ease;
+}
+
+.carousel-btn {
+  background: linear-gradient(to bottom, #222, #111);
+  color: #fff;
+  font-size: 2em;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 18px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+  transition: background 0.3s ease;
+  z-index: 10;
+}
+
+.carousel-btn:hover {
+  background: linear-gradient(to bottom, #333, #000);
+}
+
+.carousel-btn.left {
+  margin-right: 10px;
+}
+
+.carousel-btn.right {
+  margin-left: 10px;
+}
